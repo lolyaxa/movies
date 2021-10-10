@@ -60,7 +60,7 @@ const Comment = ({ item, onClose }) => (
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
-  const [text, setText] = useState();
+  const [text, setText] = useState('');
   return (
     <CommentsContainer>
       {comments.map(c => (
@@ -74,7 +74,10 @@ const Comments = () => {
         />
       ))}
       <AddComment>
-        <input size='50' onChange={(e) => setText(e.target.value)} value={text} />
+        <input
+          onChange={(e) => setText(e.target.value)}
+          value={text}
+        />
         <AddBtn
           onClick={() => {
             if (text) {
