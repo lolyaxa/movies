@@ -44,7 +44,8 @@ const formatMinutes = (m) =>
     .trim();
 
 const Movie = ({ item }) => {
-  const genres = item.genres ? item.genres.join(', ') : '';
+  const genres = item.genres ? '• ' + item.genres.join(', ') : '';
+  const duration = item.runtime ? '• ' + formatMinutes(item.runtime) : '';
   return (
     <MovieContainer img={item.background_image}>
       <Cover>
@@ -55,7 +56,7 @@ const Movie = ({ item }) => {
           {item.title_long}
         </Title>
         <Subtitle>
-          Rating {item.rating} • {formatMinutes(item.runtime)} • {genres}
+          Rating {item.rating} {duration} {genres}
         </Subtitle>
       </Header>
       <Description>
