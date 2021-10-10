@@ -12,7 +12,6 @@ const Page = styled.div`
   background-color: ${(props) => props.active ? 'rgba(186, 204, 201, 0.904);' : 'none'};
 `;
 
-
 const Pages = styled.div`
   text-align: center;
 `;
