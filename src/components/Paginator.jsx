@@ -30,13 +30,15 @@ function Paginator(props) {
   const pagesOfRepos = [];
   let i = 1;
   while ((i * perPage) <= total) {
-    pagesOfRepos.push(<PageButton
+    pagesOfRepos.push(
+    <PageButton
+      key={i}
       onClick={(pageNumber) => {
-          onSelect(pageNumber);
+        onSelect(pageNumber);
       }}
       pageNumber={i}
       active={ i === activePage }
-      />);
+    />);
     i += 1;
   }
   return <Pages>{pagesOfRepos}</Pages>

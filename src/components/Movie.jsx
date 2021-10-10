@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Comments from './Comments';
 
 const MovieContainer = styled.div`
   background-image: url(${(props) => props.img});
@@ -10,7 +11,6 @@ const MovieContainer = styled.div`
   max-width: 800px;
   border-radius: 5px;
   text-align: center;
-  margin-bottom: 10px;
   color:#fff;
   text-shadow: 1px 1px 1px #000;
 `;
@@ -26,7 +26,7 @@ const Header = styled.div`
 `;
 
 const Title = styled.div`
-  padding: 20px 15px;
+  padding: 15px;
 `;
 
 const Subtitle = styled.div`
@@ -34,7 +34,7 @@ const Subtitle = styled.div`
 `;
 
 const Description = styled.div`
-  padding: 20px 15px;
+  padding: 10px 15px;
 `;
 
 const formatMinutes = (m) =>
@@ -47,22 +47,25 @@ const Movie = ({ item }) => {
   const genres = item.genres ? '• ' + item.genres.join(', ') : '';
   const duration = item.runtime ? '• ' + formatMinutes(item.runtime) : '';
   return (
-    <MovieContainer img={item.background_image}>
-      <Cover>
-        <img src={item.small_cover_image} alt='cover' />
-      </Cover>
-      <Header>
-        <Title>
-          {item.title_long}
-        </Title>
-        <Subtitle>
-          Rating {item.rating} {duration} {genres}
-        </Subtitle>
-      </Header>
-      <Description>
-        {item.description_full}
-      </Description>
-    </MovieContainer>
+    <div>
+      <MovieContainer img={item.background_image}>
+        <Cover>
+          <img src={item.small_cover_image} alt='cover' />
+        </Cover>
+        <Header>
+          <Title>
+            {item.title_long}
+          </Title>
+          <Subtitle>
+            Rating {item.rating} {duration} {genres}
+          </Subtitle>
+        </Header>
+        <Description>
+          {item.description_full}
+        </Description>
+      </MovieContainer>
+      <Comments />
+    </div>
   )
 };
 

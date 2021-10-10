@@ -19,7 +19,7 @@ const Main = () => {
   useEffect(() => {
     if (!response) {
       async function f() {
-        const url = 'https://yts.mx/api/v2/list_movies.json?limit=50&with_images=true&with_cast=true';
+        const url = 'https://yts.mx/api/v2/list_movies.json?limit=50&with_images=true';
         let responses = await fetch(url);
         let commits = await responses.json();
         if (commits.status === 'ok') {
