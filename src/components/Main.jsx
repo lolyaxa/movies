@@ -1,10 +1,14 @@
   
 import React, { useState, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
+import Paginator from './Paginator';
+
+const PageContainer = styled.div`
+  background: #000;
+`;
 
 const MoviesContainer = styled.div`
   padding: 20px 15px;
-  background: #000;
 `;
 
 const MovieContainer = styled.div`
@@ -75,6 +79,7 @@ const Movie = ({ item }) => {
 const Main = () => {
   const [response, setResponse] = useState();
   const [isError, setIsError] = useState(false);
+  const [activePage, setActivePage] = useState(1);
   const isLoading = response === undefined;
   useEffect(() => {
     if (!response) {
@@ -98,15 +103,26 @@ const Main = () => {
   if (isLoading) {
     return <div>Загрузка...</div>;
   }
+  const movies = response.slice((activePage - 1) * 10, activePage * 10 - 1);
   return (
-    <MoviesContainer>
-      {response.map(item => (
-        <Movie
-          key={item.id}
-          item={item}
-        />
-      ))}
-    </MoviesContainer>
+    <PageContainer>
+      <MoviesContainer>
+        {movies.map(item => (
+          <Movie
+            key={item.id}
+            item={item}
+          />
+        ))}
+      </MoviesContainer>
+      <Paginator
+        total={response.length}
+        perPage={10}
+        activePage={activePage}
+        onSelect={(pageNumber) => {
+          setActivePage(pageNumber);
+        }}
+      />
+    </PageContainer>
   )
 };
 
