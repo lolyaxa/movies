@@ -24,24 +24,20 @@ const PageButton = ({ pageNumber, onClick, active }) => (
     {pageNumber}
   </Page>
 );
-
-function Paginator(props) {
-  const { total, perPage, onSelect, activePage } = props;
-  const pagesOfRepos = [];
-  let i = 1;
-  while ((i * perPage) <= total) {
-    pagesOfRepos.push(
-    <PageButton
-      key={i}
-      onClick={(pageNumber) => {
-        onSelect(pageNumber);
-      }}
-      pageNumber={i}
-      active={ i === activePage }
-    />);
-    i += 1;
-  }
-  return <Pages>{pagesOfRepos}</Pages>
+const Paginator = ({ total, perPage, onSelect, activePage }) => {
+  const pages = Array.from({ length: Math.ceil(total / perPage)}, (_, i) => i + 1)
+  return (
+    <Pages>
+      {pages.map((page) => (
+        <PageButton
+           key={page}
+           pageNumber={page}
+           active={page === activePage}
+           onClick={onSelect}
+        />
+      ))}
+    </Pages>
+  )
 }
 
 export default Paginator;
